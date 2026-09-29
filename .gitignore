@@ -1,0 +1,11 @@
+# Compilación .NET
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Archivo generado por la aplicación
+rechazos.csv

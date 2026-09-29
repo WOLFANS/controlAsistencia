@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>controlAsistencia.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\controlAsistencia\controlAsistencia.csproj" />
+  </ItemGroup>
+
+  <!-- Copiar appsettings.json del proyecto principal a una carpeta ../controlAsistencia dentro del directorio de salida
+       para que las pruebas que usan rutas relativas como "..\controlAsistencia\appsettings.json" lo encuentren al ejecutar dotnet test. -->
+  <Target Name="CopyAppsettingsToTestOutput" AfterTargets="Build">
+    <MakeDir Directories="$(OutDir)..\controlAsistencia" />
+    <Copy SourceFiles="..\controlAsistencia\appsettings.json" DestinationFiles="$(OutDir)..\controlAsistencia\appsettings.json" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
